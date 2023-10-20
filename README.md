@@ -1,4 +1,4 @@
-Goで、WriteRune を持たない io.Writer で最速で1文字出力するには
+Goで WriteRune を持たない io.Writer で最速で1文字出力するには
 ==============================================================
 
 WriteRune を持たない io.Writer 相手に 1-rune を出力するのに、fmt.Fprintf(〜,"%c") を使いがちだが、utf8.EncodeRune を使ってやった方が速いのではないかと思い検証してみた。
