@@ -109,3 +109,8 @@ ok  	github.com/hymkor/study-go-write-rune	6.576s
 bufio.NewWriter(使い回し) ＞ utf8.EncodeRune ＞ fmt.Fprintf ＞＞ bufio.NewWriter(使い捨て)
 
 いちいち、utf8.EncodeRune を使う価値はある
+
+補足
+----
+
+`fmt.Fprint(w,'あ')` は 12354 と数値が出力され、期待どおりの結果にならない
