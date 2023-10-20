@@ -1,12 +1,14 @@
 Goで、WriteRune を持たない io.Writer で最速で1文字出力するには
 ==============================================================
 
+WriteRune を持たない io.Writer 相手に 1-rune を出力するのに、fmt.Fprintf(〜,"%c") を使いがちだが、utf8.EncodeRune を使ってやった方が速いのではないかと思い検証してみた。
+
+一応、参考データとして、次のように bufio.NewWriter も含めた形でベンチマークをとってみる。
+
 1. fmt.Fprintf
 2. utf8.EncodeRune
 3. bufio.NewWriter (インスタンスを使い捨て)
 4. bufio.NewWriter (インスタンス使いまわし)
-
-の速度を比較する
 
 テストプログラム
 ----------------
@@ -105,3 +107,5 @@ ok  	github.com/hymkor/study-go-write-rune	6.576s
 ほぼ、予想どおり
 
 bufio.NewWriter(使い回し) ＞ utf8.EncodeRune ＞ fmt.Fprintf ＞＞ bufio.NewWriter(使い捨て)
+
+いちいち、utf8.EncodeRune を使う価値はある
